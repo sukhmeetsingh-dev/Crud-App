@@ -1,5 +1,6 @@
 import Home from './components/Home';
 import Add from './components/Add';
+import Edit from './components/Edit';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/create" element={<Add/>} />
+          <Route path="/create" element={<Edit/>} />
         </Routes>
       </Router>
     </div>
