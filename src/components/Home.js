@@ -1,9 +1,23 @@
 import React from 'react'
-import {Table} from 'react-bootstrap';
+import {Button, Table} from 'react-bootstrap';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Employees from './Employees';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Home() {
+
+    let history = useNavigate();
+
+    const handleDelete = (id) => {
+        var index = Employees.map(function(e){
+            return e.id
+        }).indexOf(id);
+
+        Employees.splice(index,1);
+
+        history('/')
+    }
+
     return (
         <>
             <div style={{ margin: "10rem" }}>
@@ -15,6 +29,9 @@ function Home() {
                             </th>
                             <th>
                                 Age
+                            </th>
+                            <th>
+                                Action
                             </th>
                         </tr>
                     </thead>
@@ -30,6 +47,13 @@ function Home() {
                                             <td>
                                                 {item.Age}
                                             </td>
+                                            <td>
+                                                <Link to={`edit`}>
+                                                <Button onClick= {() => alert(item.id)}> EDIT </Button>
+                                                </Link>
+                                                &nbsp;
+                                                <Button onClick= {() => handleDelete(item.id)}> DELETE </Button>
+                                            </td>
                                         </tr>
                                     )
                                 })
@@ -38,6 +62,10 @@ function Home() {
                         }
                     </tbody>
                 </Table>
+                <br/>
+                <Link className='d-grid gap-2' to="/create">
+                    <Button size="lg">Create</Button>
+                </Link>       
             </div>
         </>
     )
